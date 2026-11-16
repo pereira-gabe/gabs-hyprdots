@@ -1,0 +1,3 @@
+ble-face auto_complete='fg=244'
+ble-bind -f M-DEL kill-backward-cword
+ble-bind -f M-BS kill-backward-cword

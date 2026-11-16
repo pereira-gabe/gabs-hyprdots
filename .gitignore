@@ -1,0 +1,14 @@
+assets/home/.config/opencode/service.json
+assets/home/.config/gh/hosts.yml
+assets/home/.config/spotify/
+assets/home/.config/mozilla/
+assets/home/.config/Code/User/globalStorage/
+assets/home/.local/
+.git-credentials
+*.token
+
+*~
+*.swp
+*.bak
+.DS_Store
+__pycache__/

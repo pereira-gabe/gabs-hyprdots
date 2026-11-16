@@ -1,0 +1,6 @@
+# Shared clang-format/clangd fallback for files without a local .clang-format.
+# Matches the LLVM style with 4-space indentation used by Neovim.
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never

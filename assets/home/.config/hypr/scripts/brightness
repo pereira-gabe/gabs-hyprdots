@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+
+step=5
+
+current() {
+	brightnessctl -m | cut -d, -f4 | tr -d '%'
+}
+
+notify() {
+	dunstify -a "BRIGHTNESS" "$1" -h int:value:"$2" \
+		-i display-brightness-symbolic -r 2593 -u normal || true
+}
+
+case "${1:-}" in
+up)
+	brightnessctl set "${step}%+"
+	value="$(current)"
+	notify "Increasing to ${value}%" "$value"
+	;;
+down)
+	brightnessctl set "${step}%-"
+	value="$(current)"
+	notify "Decreasing to ${value}%" "$value"
+	;;
+*)
+	printf 'usage: %s up|down\n' "$0" >&2
+	exit 2
+	;;
+esac

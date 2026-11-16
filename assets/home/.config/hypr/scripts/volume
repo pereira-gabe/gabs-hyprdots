@@ -1,0 +1,55 @@
+#!/bin/sh
+set -eu
+
+step=2
+
+notify() {
+	summary="$1"
+	icon="$2"
+	value="${3:-}"
+	if [ -n "$value" ]; then
+		dunstify -a "VOLUME" "$summary" -h int:value:"$value" -i "$icon" -r 2593 -u normal || true
+	else
+		dunstify -a "VOLUME" "$summary" -i "$icon" -r 2593 -u normal || true
+	fi
+}
+
+play_sound() {
+	if command -v canberra-gtk-play >/dev/null 2>&1; then
+		canberra-gtk-play -i audio-volume-change -d "changevolume" &
+	fi
+}
+
+up() {
+	pamixer -i "$step"
+	volume="$(pamixer --get-volume)"
+	notify "Increasing to ${volume}%" audio-volume-high-symbolic "$volume"
+	play_sound
+}
+
+down() {
+	pamixer -d "$step"
+	volume="$(pamixer --get-volume)"
+	notify "Decreasing to ${volume}%" audio-volume-low-symbolic "$volume"
+	play_sound
+}
+
+mute() {
+	if [ "$(pamixer --get-mute)" = "true" ]; then
+		pamixer -u
+		notify "UNMUTED" audio-volume-high-symbolic
+	else
+		pamixer -m
+		notify "MUTED" audio-volume-muted-symbolic
+	fi
+}
+
+case "${1:-}" in
+up) up ;;
+down) down ;;
+mute) mute ;;
+*)
+	printf 'usage: %s up|down|mute\n' "$0" >&2
+	exit 2
+	;;
+esac

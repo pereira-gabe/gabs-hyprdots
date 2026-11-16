@@ -1,0 +1,2 @@
+-- Add custom autocmds here. LazyVim's defaults live in
+-- lua/lazyvim/config/autocmds.lua.
