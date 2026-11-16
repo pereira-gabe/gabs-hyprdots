@@ -139,8 +139,8 @@ gabs-hyprdots/
 │   ├── pacman.txt
 │   └── aur.txt
 └── assets/
-    ├── screenshots/      # demo of the rice
-    ├── wallpapers/       # bundled wallpapers
+    ├── screenshots/      
+    ├── wallpapers/       
     └── home/
         ├── .bashrc
         ├── .gitconfig
