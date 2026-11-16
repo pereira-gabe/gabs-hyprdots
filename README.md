@@ -3,9 +3,6 @@
 Personal Arch Linux setup built around Hyprland (Lua config), Waybar, Dunst,
 Rofi, Kitty/Alacritty, and LazyVim.
 
-Generated credentials and local application state are kept out of version
-control by `.gitignore`.
-
 ## Preview
 
 | Desktop | Terminal |
