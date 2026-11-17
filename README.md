@@ -9,8 +9,6 @@ Rofi, Kitty/Alacritty, and LazyVim.
 | --- | --- |
 | <img src="assets/screenshots/screenshot1.png" alt="Hyprland desktop" width="100%"> | <img src="assets/screenshots/screenshot2.png" alt="Kitty, fastfetch and installer" width="100%"> |
 
-The second screenshot has the username and local IP redacted.
-
 ## Included
 
 | Area | Files |
