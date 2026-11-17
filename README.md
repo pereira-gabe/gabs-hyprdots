@@ -232,9 +232,6 @@ The following items were deliberately excluded:
 - Personal absolute paths from `QtProject.conf`, GIMP `theme.css`, and
   similar application state
 
-The username and local IP are redacted in
-`assets/screenshots/screenshot2.png`.
-
 `~/.gitconfig` uses placeholders and delegates GitHub authentication to `gh`.
 The root `.gitignore` keeps generated credentials and local application state
 out of version control.
