@@ -9,6 +9,7 @@ INSTALL_PACKAGES=0
 RELOAD=0
 DRY_RUN=0
 FORCE_CONFIGS=0
+SET_SHELL=0
 
 usage() {
 	cat <<'EOF'
@@ -17,6 +18,7 @@ Usage: ./install.sh [options]
 Options:
   -p, --packages   Install the packages listed in packages/ (pacman + yay).
   -r, --reload     Reload Hyprland, Waybar and Dunst after installing.
+  -s, --shell      Set zsh as the login shell for the current user.
   -f, --force      Replace ~/.gitconfig when it already exists.
   -n, --dry-run    Print the actions without changing files.
   -h, --help       Show this help.
@@ -30,6 +32,7 @@ while (($#)); do
 	case "$1" in
 	-p | --packages) INSTALL_PACKAGES=1 ;;
 	-r | --reload) RELOAD=1 ;;
+	-s | --shell) SET_SHELL=1 ;;
 	-f | --force) FORCE_CONFIGS=1 ;;
 	-n | --dry-run) DRY_RUN=1 ;;
 	-h | --help)
@@ -147,6 +150,24 @@ install_packages() {
 	fi
 }
 
+set_login_shell() {
+	local zsh_path current_shell
+	zsh_path="$(command -v zsh || true)"
+
+	if [[ -z "$zsh_path" ]]; then
+		printf 'install.sh: zsh is not installed; skipping login shell change.\n' >&2
+		return 0
+	fi
+
+	current_shell="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
+	if [[ "$current_shell" == "$zsh_path" ]]; then
+		printf 'skip login shell (already %s)\n' "$zsh_path"
+		return 0
+	fi
+
+	run chsh -s "$zsh_path"
+}
+
 if ((INSTALL_PACKAGES)); then
 	install_packages
 fi
@@ -171,6 +192,10 @@ if ((!DRY_RUN)); then
 	fi
 fi
 
+if ((SET_SHELL)); then
+	set_login_shell
+fi
+
 if ((RELOAD)) && ((!DRY_RUN)); then
 	if command -v hyprctl >/dev/null 2>&1 && hyprctl version >/dev/null 2>&1; then
 		hyprctl reload || true
@@ -192,7 +217,9 @@ Next steps:
   2. Put wallpapers in ~/.config/hypr/wallpapers, then run:
        ~/.config/hypr/wallpaper-restart.sh
   3. Log out and select Hyprland in your display manager.
-  4. Optional Hyprspace plugin:
+  4. Use zsh as your login shell (skip if you passed --shell):
+       chsh -s /usr/bin/zsh
+  5. Optional Hyprspace plugin:
        hyprpm add https://github.com/KZDKM/Hyprspace
        hyprpm enable Hyprspace
 EOF

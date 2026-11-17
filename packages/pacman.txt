@@ -38,6 +38,10 @@ imagemagick
 curl
 git
 neovim
+zsh
+zsh-autosuggestions
+zsh-history-substring-search
+zsh-syntax-highlighting
 btop
 fastfetch
 hyfetch

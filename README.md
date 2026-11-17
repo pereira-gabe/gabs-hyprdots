@@ -1,7 +1,7 @@
 # gabs-hyprdots
 
 Personal Arch Linux setup built around Hyprland (Lua config), Waybar, Dunst,
-Rofi, Kitty, and LazyVim.
+Rofi, Kitty, Zsh, and LazyVim.
 
 ## Preview
 
@@ -19,7 +19,7 @@ Rofi, Kitty, and LazyVim.
 | Launcher | `rofi/config.rasi`, `colors.rasi`, `fonts.rasi` |
 | Terminals | `kitty/kitty.conf` |
 | Editor | `nvim/` (LazyVim, lockfile included) |
-| Shell | `.bashrc`, `.bash_profile`, `.inputrc`, `.editrc`, `.blerc` |
+| Shell | `.zshrc`, `.zshenv`, `.bashrc`, `.bash_profile`, `.inputrc`, `.editrc`, `.blerc` |
 | Assets | `assets/wallpapers/`, `assets/screenshots/` |
 | Other | `btop`, `clangd`, `clang-format`, `gtk-3.0`, `gtk-4.0`, `gh`, `opencode`, `Code/User`, `hyfetch`, `pavucontrol`, `user-dirs`, `flameshot` |
 
@@ -27,6 +27,7 @@ Rofi, Kitty, and LazyVim.
 
 - Arch Linux (or an Arch-based distribution)
 - Hyprland 0.57 or newer (Lua configuration support)
+- Zsh 5.9 or newer for the interactive shell configuration
 - A Nerd Font: `ttf-jetbrains-mono-nerd`
 - `otf-font-awesome` for a few Waybar icons
 - An NVIDIA GPU for the `LIBVA_DRIVER_NAME` settings in `hypr/env.lua`
@@ -46,6 +47,7 @@ Useful options:
 | --- | --- |
 | `--packages` | Install official packages with `pacman` and AUR packages with `yay` |
 | `--reload` | Reload Hyprland, Waybar and Dunst after installing |
+| `--shell` | Set zsh as the login shell with `chsh` |
 | `--force` | Replace an existing `~/.gitconfig` (the default is to skip it) |
 | `--dry-run` | Print actions without changing files |
 | `--help` | Show the built-in help |
@@ -60,7 +62,8 @@ The installer:
 4. Creates `~/.config/hypr/wallpapers/` and copies any images from
    `assets/wallpapers/`.
 5. Enables the `hyprpolkitagent` user service when available.
-6. Leaves `~/.gitconfig` untouched unless `--force` is used.
+6. Sets zsh as the login shell when `--shell` is used.
+7. Leaves `~/.gitconfig` untouched unless `--force` is used.
 
 ## Post-install
 
@@ -70,6 +73,22 @@ The installer:
 $EDITOR ~/.gitconfig        # set user.name and user.email
 gh auth login               # credentials are delegated to gh
 ```
+
+### Shell
+
+`.zshrc` and `.zshenv` are installed to `$HOME` and are used by every zsh
+process. The interactive config enables autosuggestions, history substring
+search, fzf bindings, and syntax highlighting, loading each plugin from
+`/usr/share/` and skipping any plugin that is not installed.
+
+Set zsh as the login shell (or pass `--shell` to `install.sh`):
+
+```sh
+chsh -s /usr/bin/zsh
+```
+
+The prompt is a two-line Kali-style prompt and history is written to
+`~/.zsh_history`. The Bash files remain available as a fallback.
 
 ### Wallpaper
 
@@ -140,6 +159,8 @@ gabs-hyprdots/
     ├── screenshots/      
     ├── wallpapers/       
     └── home/
+        ├── .zshrc
+        ├── .zshenv
         ├── .bashrc
         ├── .gitconfig
         └── .config/
@@ -248,6 +269,15 @@ Install `ttf-jetbrains-mono-nerd`, `otf-font-awesome`, `noto-fonts`, and
 
 ```sh
 ~/.config/waybar/restart.sh
+```
+
+### zsh plugins do not load
+
+The configuration sources plugins from `/usr/share/`. Install the missing
+packages:
+
+```sh
+sudo pacman -S zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
 ```
 
 ### Screen sharing does not work
