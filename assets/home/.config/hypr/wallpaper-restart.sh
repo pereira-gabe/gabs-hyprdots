@@ -48,7 +48,6 @@ if [[ -n "$WALL" && -f "$WALL" ]]; then
 	setsid -f swaybg -o '*' -i "$WALL" -m "$MODE" >/dev/null 2>&1
 	mkdir -p "$STATE_DIR"
 	printf '%s\n' "$WALL" >"$STATE_FILE"
-	"$HOME/.config/waybar/scripts/wallpaper-colors.sh" "$WALL" || true
 	printf 'wallpaper-restart: %s (%s)\n' "$WALL" "$MODE"
 else
 	setsid -f swaybg -o '*' -c '#0f161e' >/dev/null 2>&1

@@ -10,7 +10,11 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font",
+        "Noto Sans CJK JP",
+        "Noto Sans CJK SC",
+        "Noto Sans CJK KR",
+        sans-serif;
     font-weight: bold;
     font-size: 13px;
     min-height: 21px;
