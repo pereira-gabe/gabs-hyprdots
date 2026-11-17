@@ -4,7 +4,6 @@ hyprpicker
 hyprpolkitagent
 waybar
 kitty
-alacritty
 rofi
 dunst
 libnotify

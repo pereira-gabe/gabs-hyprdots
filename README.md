@@ -1,7 +1,7 @@
 # gabs-hyprdots
 
 Personal Arch Linux setup built around Hyprland (Lua config), Waybar, Dunst,
-Rofi, Kitty/Alacritty, and LazyVim.
+Rofi, Kitty, and LazyVim.
 
 ## Preview
 
@@ -17,7 +17,7 @@ Rofi, Kitty/Alacritty, and LazyVim.
 | Status bar | `waybar/config.jsonc`, `style.css`, `restart.sh`, `scripts/` |
 | Notifications | `dunst/dunstrc`, `scripts/playNotificationSound.sh` |
 | Launcher | `rofi/config.rasi`, `colors.rasi`, `fonts.rasi` |
-| Terminals | `kitty/kitty.conf`, `alacritty/alacritty.toml`, `alacritty/themes/` |
+| Terminals | `kitty/kitty.conf` |
 | Editor | `nvim/` (LazyVim, lockfile included) |
 | Shell | `.bashrc`, `.bash_profile`, `.inputrc`, `.editrc`, `.blerc` |
 | Assets | `assets/wallpapers/`, `assets/screenshots/` |
@@ -148,7 +148,6 @@ gabs-hyprdots/
             ├── dunst/
             ├── rofi/
             ├── kitty/
-            ├── alacritty/
             ├── nvim/
             └── ...
 ```
