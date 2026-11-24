@@ -18,7 +18,7 @@ Rofi, Kitty, Zsh, and LazyVim.
 | Notifications | `dunst/dunstrc`, `scripts/playNotificationSound.sh` |
 | Launcher | `rofi/config.rasi`, `colors.rasi`, `fonts.rasi` |
 | Terminals | `kitty/kitty.conf` |
-| Editor | `nvim/` (LazyVim, lockfile included) |
+| Editor | `nvim/` |
 | Shell | `.zshrc`, `.zshenv`, `.bashrc`, `.bash_profile`, `.inputrc`, `.editrc`, `.blerc` |
 | Assets | `assets/wallpapers/`, `assets/screenshots/` |
 | Other | `btop`, `clangd`, `clang-format`, `gtk-3.0`, `gtk-4.0`, `gh`, `opencode`, `Code/User`, `hyfetch`, `pavucontrol`, `user-dirs`, `flameshot` |
@@ -27,7 +27,7 @@ Rofi, Kitty, Zsh, and LazyVim.
 
 - Arch Linux (or an Arch-based distribution)
 - Hyprland 0.57 or newer (Lua configuration support)
-- Zsh 5.9 or newer for the interactive shell configuration
+- Zsh 5.9 or newer 
 - A Nerd Font: `ttf-jetbrains-mono-nerd`
 - `otf-font-awesome` for a few Waybar icons
 - An NVIDIA GPU for the `LIBVA_DRIVER_NAME` settings in `hypr/env.lua`
@@ -228,121 +228,4 @@ hyprctl configerrors
 ~/.config/hypr/wallpaper-restart.sh
 ~/.config/hypr/scripts/screensharing.sh
 ```
-
-## Privacy and secrets
-
-This tree contains configuration, selected wallpapers, and demo screenshots.
-The following items were deliberately excluded:
-
-- `~/.config/gh/hosts.yml` and OAuth tokens
-- `~/.config/opencode/service.json` (local service password)
-- `~/.git-credentials`, `~/token.txt`, `~/github-recovery-codes.txt`
-- Spotify `prefs` (saved credentials)
-- Browser profiles, VS Code `globalStorage`, OBS scenes, GIMP/LibreOffice/
-  Pinta state, SWI-Prolog history
-- Telemetry IDs from `nextjs-nodejs/config.json`
-- Personal absolute paths from `QtProject.conf`, GIMP `theme.css`, and
-  similar application state
-
-`~/.gitconfig` uses placeholders and delegates GitHub authentication to `gh`.
-The root `.gitignore` keeps generated credentials and local application state
-out of version control.
-
-## Not included
-
-- `waybar-2/`: older alternative Waybar configuration. The active one is
-  `waybar/`.
-- `2026-10-30_10-45.png`: screenshot, not a wallpaper, so it is not bundled.
-- `neofetch/config.conf`: `neofetch` is not installed and the file is the
-  upstream default.
-- Dunst Eww/album-art scripts: Eww is not installed and the scripts were
-  unused.
-- `hypr/scripts/appLaunch/`: third-party Rofi themes that are not referenced
-  by the active Rofi config.
-- Bundled `hyprpicker` binary: install the `hyprpicker` package instead.
-
-## Troubleshooting
-
-### Hyprland reports config errors
-
-```sh
-hyprctl configerrors
-```
-
-`hyprctl reload` applies the Lua config without restarting the session.
-
-### Waybar icons or text are missing
-
-Install `ttf-jetbrains-mono-nerd`, `otf-font-awesome`, `noto-fonts`, and
-`noto-fonts-emoji`, then restart Waybar:
-
-```sh
-~/.config/waybar/restart.sh
-```
-
-### zsh plugins do not load
-
-The configuration sources plugins from `/usr/share/`. Install the missing
-packages:
-
-```sh
-sudo pacman -S zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
-```
-
-### Screen sharing does not work
-
-Restart the portals:
-
-```sh
-~/.config/hypr/scripts/screensharing.sh
-```
-
-### Temperature shows nothing
-
-The Waybar module expects Intel `coretemp`. Check the path:
-
-```sh
-for h in /sys/class/hwmon/hwmon*; do echo "$h: $(cat "$h/name")"; done
-```
-
-Then update `hwmon-path-abs` in `waybar/config.jsonc`.
-
-### Spotify module is empty
-
-The module uses `waybar/scripts/spotify.sh` and `playerctl`:
-
-```sh
-playerctl -p spotify status
-~/.config/waybar/scripts/spotify.sh
-```
-
-The script prints an empty text when Spotify is not running.
-
-### Suspend does not happen when closing the lid
-
-Check that Hyprland sees the switch and the bind:
-
-```sh
-hyprctl devices | grep -A1 Switches
-hyprctl binds | grep -A8 'Lid Switch'
-```
-
-Run the script manually to see the error:
-
-```sh
-~/.config/hypr/scripts/lid.sh
-```
-
-## Restore a backup
-
-```sh
-ls ~/.local/state/dotfiles-backups/
-cp -a ~/.local/state/dotfiles-backups/<timestamp>/. ~/
-```
-
-## Credits
-
-- Rofi themes based on Aditya Shakya's (`adi1090x`) themes.
-- Neovim configuration based on [LazyVim](https://github.com/LazyVim/LazyVim);
-  its license is kept in `nvim/LICENSE`.
 - Hyprspace plugin by [KZDKM](https://github.com/KZDKM/Hyprspace).
