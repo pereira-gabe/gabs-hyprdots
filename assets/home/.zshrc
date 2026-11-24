@@ -34,13 +34,23 @@ setopt longlistjobs
 
 # Key bindings
 bindkey -e
-# Backspace: QTerminal may send ^H instead of ^?, so map both to one char.
+# Backspace: some terminals send ^H instead of ^?; map both to one character.
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 bindkey '^W' backward-kill-word
 bindkey '^[[3;5~' kill-word
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
+
+# Alt+Backspace: delete a single word, not the whole path.
+# zsh includes '/' in WORDCHARS, so backward-kill-word would eat directories.
+backward-kill-word-only() {
+	local WORDCHARS=''
+	zle backward-kill-word
+}
+zle -N backward-kill-word-only
+bindkey '^[^?' backward-kill-word-only
+bindkey '^[^H' backward-kill-word-only
 
 # Completion
 fpath=(/usr/share/zsh/site-functions $fpath)
@@ -61,7 +71,7 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' squeeze-slashes true
 
 # Aliases
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -A'
 alias grep='grep --color=auto'
 alias vim='nvim'
 alias top='btop'
@@ -69,13 +79,16 @@ alias off='poweroff'
 alias larp='fastfetch'
 alias ff='firefox &'
 alias xx='g++'
+alias codec='code ~/Temp'
+alias gif='kitten icat'
+alias sl='kitten icat ~/Pictures/text-here.png'
 
-# Kali-style two-line prompt, using the terminal's blue.
-PROMPT=$'%f┌──(%B%F{blue}%n%F{white}@%F{blue}%m%b%f)-[%B%F{white}%(6~.%-1~/…/%4~.%5~)%b%f]\n%f└─%B%F{blue}%(#.#.$)%b%f '
+# Kali-style two-line prompt: @ and path in pure white (#FFFFFF), $ in blue like the user.
+PROMPT=$'%f┌──(%B%F{blue}%n%F{#ffffff}@%F{blue}%m%b%f)-[%B%F{#ffffff}%(6~.%-1~/…/%4~.%5~)%b%f]\n%f└─%B%F{blue}%(#.#.$)%b%f '
 PROMPT2='%F{blue}%_> %f'
 PROMPT_EOL_MARK=''
 
-# Keep the QTerminal tab/window title in the same user@host: path format.
+# Keep the terminal tab/window title as user@host: path.
 set_terminal_title() { print -Pn "\e]0;%n@%m: %~\a" }
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set_terminal_title
@@ -107,3 +120,4 @@ fi
 if [[ -r /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
 	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+export PATH=~/.npm-global/bin:$PATH

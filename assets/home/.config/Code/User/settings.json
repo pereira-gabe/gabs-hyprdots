@@ -38,7 +38,7 @@
   // Theme-specific UI
   "diffEditor.renderSideBySide": false,
   "editor.copyWithSyntaxHighlighting": false,
-  "editor.snippetSuggestions": "bottom",
+  "editor.snippetSuggestions": "top",
   "editor.tabSize": 4,
   "editor.detectIndentation": true,
   "editor.multiCursorModifier": "ctrlCmd",
@@ -141,4 +141,5 @@
   "editor.unicodeHighlight.nonBasicASCII": false,
   "update.showReleaseNotes": false,
   "window.confirmSaveUntitledWorkspace": false,
+  "network.meteredConnection": "off",
 }

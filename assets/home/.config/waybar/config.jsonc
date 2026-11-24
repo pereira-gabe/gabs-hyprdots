@@ -37,7 +37,7 @@
         "custom/padd"
     ],
     "custom/launcher": {
-        "format": " <span color='#1a2530'> </span>",
+        "format": " <span color='#000000'> </span>",
         "on-click": "rofi -show drun"
     },
     "hyprland/workspaces": {

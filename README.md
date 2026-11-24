@@ -90,6 +90,16 @@ chsh -s /usr/bin/zsh
 The prompt is a two-line Kali-style prompt and history is written to
 `~/.zsh_history`. The Bash files remain available as a fallback.
 
+### Kitty palette
+
+`kitty.conf` can load a [pywal](https://github.com/dylanaraps/pywal) palette
+from `~/.cache/wal/colors-kitty.conf`. The `include` line is commented out by
+default; uncomment it after generating that file.
+
+Remote control (`allow_remote_control` and `listen_on`) is left disabled: a
+socket under `/tmp` can be reached by other local users. Enable it only when
+needed.
+
 ### Wallpaper
 
 The bundled images are installed automatically:
@@ -106,7 +116,7 @@ cp /path/to/image.jpg ~/.config/hypr/wallpapers/
 ```
 
 Without an image, the script falls back to a solid `#0f161e` background.
-`hyprlock.conf` references `wallpapers/joy_division.jpg`, which is included.
+`hyprlock.conf` references `wallpapers/mountains.png`, which is included.
 
 Set `WALLPAPER_MODE` to `fit`, `stretch`, `center`, `tile`, or `solid_color`
 to override the default `fill` mode.
@@ -184,7 +194,9 @@ gabs-hyprdots/
 | `SUPER + E` | PCManFM |
 | `SUPER + D` | Rofi application launcher |
 | `SUPER + Tab` | Hyprspace overview (if loaded) |
-| `SUPER + Q/W/C` | Close window |
+| `SUPER + Q/W` | Close window |
+| `SUPER + C` | VS Code in `~/Temp` |
+| `SUPER + N` | VS Code in `~/Code/Neetcode` |
 | `SUPER + T` | Toggle floating |
 | `SUPER + F` | Toggle maximize |
 | `SUPER + Shift + F` | Toggle fullscreen |
