@@ -30,7 +30,7 @@ Rofi, Kitty, Zsh, and LazyVim.
 - Zsh 5.9 or newer 
 - A Nerd Font: `ttf-jetbrains-mono-nerd`
 - `otf-font-awesome` for a few Waybar icons
-- NVIDIA GPU with the matching driver: `nvidia-open-dkms` for Turing/Ampere or newer (required on 50xx), `nvidia-dkms` for older cards, plus `nvidia-utils`, `egl-wayland` and `libva-nvidia-driver` for `hypr/env.lua`
+- NVIDIA GPU (optional): `nvidia-open-dkms` (Turing+/50xx) or `nvidia-dkms` (older) + `nvidia-utils`, `egl-wayland`, `libva-nvidia-driver`; AMD/Intel works with mesa (drop the NVIDIA vars in `hypr/env.lua`)
 
 The package lists are in `packages/pacman.txt` and `packages/aur.txt`.
 
