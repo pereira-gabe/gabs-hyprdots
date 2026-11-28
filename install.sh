@@ -159,7 +159,7 @@ set_login_shell() {
 		return 0
 	fi
 
-	current_shell="$(getent passwd "$USER" 2>/dev/null | cut -d: -f7)"
+	current_shell="$(getent passwd "$(id -un)" 2>/dev/null | cut -d: -f7 || true)"
 	if [[ "$current_shell" == "$zsh_path" ]]; then
 		printf 'skip login shell (already %s)\n' "$zsh_path"
 		return 0
@@ -172,10 +172,17 @@ if ((INSTALL_PACKAGES)); then
 	install_packages
 fi
 
-while IFS= read -r -d '' src; do
-	rel="${src#"$SOURCE_DIR"/}"
+if ! command -v git >/dev/null 2>&1 || ! git -C "$DOTFILES_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+	printf 'install.sh: a git checkout is required to select files to install.\n' >&2
+	exit 1
+fi
+
+while IFS= read -r -d '' tracked; do
+	src="$DOTFILES_DIR/$tracked"
+	[[ -f "$src" ]] || continue
+	rel="${tracked#assets/home/}"
 	install_file "$src" "$HOME/$rel"
-done < <(find "$SOURCE_DIR" -type f -print0 | sort -z)
+done < <(git -C "$DOTFILES_DIR" ls-files -z -- assets/home)
 
 if ((!DRY_RUN)); then
 	mkdir -p "$HOME/.config/hypr/wallpapers"

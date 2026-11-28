@@ -3,7 +3,8 @@ set -euo pipefail
 
 picker="$(command -v hyprpicker || true)"
 if [[ -z "$picker" ]]; then
-	picker="$HOME/.config/hypr/scripts/hyprpicker"
+	printf 'hyprPicker.sh: hyprpicker is not installed\n' >&2
+	exit 1
 fi
 
 color="$("$picker" --format hex | tr -d '\n')"
