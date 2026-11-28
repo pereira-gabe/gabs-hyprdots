@@ -9,5 +9,10 @@
         "key": "ctrl+shift+alt+down",
         "command": "-editor.action.copyLinesDownAction",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "workbench.action.terminal.setDimensions",
+        "when": "terminalFocus"
     }
 ]

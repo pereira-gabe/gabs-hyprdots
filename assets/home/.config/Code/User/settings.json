@@ -4,6 +4,7 @@
     "workbench.list.smoothScrolling": true,
     "editor.smoothScrolling": true,
     "terminal.integrated.smoothScrolling": true,
+    "workbench.panel.defaultLocation": "right",
     "editor.cursorBlinking": "expand",
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace",
     "files.autoSave": "afterDelay",
@@ -23,7 +24,13 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "breadcrumbs.enabled": false,
-  "workbench.startupEditor": "newUntitledFile",
+  "workbench.startupEditor": "none",
+  // Não restaurar nada ao abrir/fechar
+  "window.restoreWindows": "none",
+  "workbench.editor.restoreEditors": false,
+  "workbench.editor.restoreViewState": false,
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
   "editor.lightbulb.enabled": "off",
   "editor.overviewRulerBorder": false,
   "editor.renderLineHighlight": "line",
@@ -110,7 +117,11 @@
   "editor.semanticHighlighting.enabled": true,
   "editor.linkedEditing": true,
   "editor.bracketPairColorization.enabled": true,
-  // Suggestions
+  // Suggestions / PlatformIO IntelliSense
+  "platformio-ide.autoRebuildAutocompleteIndex": true,
+  "platformio-ide.activateProjectOnTextEditorChange": true,
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.autocomplete": "default",
   "editor.inlineSuggest.enabled": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.quickSuggestions": {
@@ -142,4 +153,18 @@
   "update.showReleaseNotes": false,
   "window.confirmSaveUntitledWorkspace": false,
   "network.meteredConnection": "off",
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
 }
