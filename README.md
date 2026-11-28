@@ -30,7 +30,7 @@ Rofi, Kitty, Zsh, and LazyVim.
 - Zsh 5.9 or newer 
 - A Nerd Font: `ttf-jetbrains-mono-nerd`
 - `otf-font-awesome` for a few Waybar icons
-- An NVIDIA GPU for the `LIBVA_DRIVER_NAME` settings in `hypr/env.lua`
+- NVIDIA GPU with the matching driver: `nvidia-open-dkms` for Turing/Ampere or newer (required on 50xx), `nvidia-dkms` for older cards, plus `nvidia-utils`, `egl-wayland` and `libva-nvidia-driver` for `hypr/env.lua`
 
 The package lists are in `packages/pacman.txt` and `packages/aur.txt`.
 
