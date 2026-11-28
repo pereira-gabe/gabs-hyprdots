@@ -7,7 +7,7 @@ Rofi, Kitty, Zsh, and LazyVim.
 
 | Desktop | Terminal |
 | --- | --- |
-| <img src="assets/screenshots/screenshot1.png" alt="Hyprland desktop" width="100%"> | <img src="assets/screenshots/screenshot2.png" alt="Kitty, fastfetch and installer" width="100%"> |
+| <img src="assets/screenshots/screenshot1.png?v=20261128" alt="Hyprland desktop" width="100%"> | <img src="assets/screenshots/screenshot2.png?v=20261128" alt="Kitty, fastfetch and installer" width="100%"> |
 
 ## Included
 
